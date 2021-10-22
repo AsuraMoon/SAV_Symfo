@@ -1,10 +1,43 @@
 {% extends 'base.html.twig' %}
 
+
 {% block title %}Service Après-Vente{% endblock %}
 
 {% block body %}
 
-<h1>Resumer des rdv</h1>
+<h1>Prendres des rdv</h1>
 
+
+
+{{ form_start(formSAV) }}
+
+<div class="form-group">
+    <label for="">Prénom </label>
+    {{ form_widget(formSAV.fName) }}
+</div><br/>
+<div class="form-group">
+    <label for="">Nom </label>
+    {{ form_widget(formSAV.lName) }}
+</div><br/>
+<div class="form-group">
+    <label for="">Email </label>
+    {{ form_widget(formSAV.mail) }}
+</div><br/>
+<div class="form-group">
+    <label for="">Numéro </label>
+    {{ form_widget(formSAV.phone) }}
+</div><br/>
+<div class="form-group">
+    <label for="">Type de Produits </label>
+    {{ form_widget(formSAV.categories) }}
+</div><br/>
+<div class="form-group">
+    <label for="">Numéro du Produits </label>
+    {{ form_widget(formSAV.numProduct) }}
+</div>
+<button type="submit">Prendre le RDV</button>
+
+
+{{ form_end(formSAV) }}
 
 {% endblock %}
