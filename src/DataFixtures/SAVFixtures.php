@@ -23,8 +23,8 @@ class SAVFixtures extends Fixture
                 ->setphone($faker->phoneNumber())
                 ->setcategories($faker->jobTitle())
                 ->setnumProduct($faker->randomNumber());
-
-            $manager->persist($sav);
+               
+                $manager->persist($sav);
         }
         $manager->flush();
     }

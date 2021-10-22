@@ -38,6 +38,11 @@ class ServiceController extends AbstractController
     public function index()
     {            
         $repo = $this->getDoctrine()->getRepository(SAV::class);
-        return $this->render('service/service.html.twig');
+        $retours = $repo->findAll();
+        dump($retours);
+
+        return $this->render('service/service.html.twig',[
+            "retours" => $retours
+        ]);
     }
 }

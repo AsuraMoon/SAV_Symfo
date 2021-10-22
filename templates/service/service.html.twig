@@ -4,8 +4,19 @@
 
 {% block body %}
 
-<h1>Votre requête SAV</h1>
+<h1>Les requêtes SAV</h1>
 
+{% for retour in retours %}
 
+<p>
+    {{retour.fName}}
+    {{retour.lName}}
+    {{retour.mail}}
+    {{retour.phone}}
+    {{retour.categories}}
+    {{retour.numProduct}}
+<p>
+
+{% endfor %}
 
 {% endblock %}
