@@ -6,6 +6,8 @@ use App\Entity\SAV;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+use function Symfony\Component\DependencyInjection\Loader\Configurator\ref;
+
 /**
  * @method SAV|null find($id, $lockMode = null, $lockVersion = null)
  * @method SAV|null findOneBy(array $criteria, array $orderBy = null)
@@ -19,16 +21,12 @@ class SAVRepository extends ServiceEntityRepository
         parent::__construct($registry, SAV::class);
     }
 
-    public function getTodayDate():void 
+    public function getTodayDate() 
     {
-        $now = $this->getEntityManager();
-        $query = $now->createQuery('
-            SELECT * FROM `sav` 
-            WHERE date = date(now()) 
-            ORDER by `day_moment`
-            ');
+        $entityManager  = $this->getEntityManager();
+        $query = $entityManager ->createQuery('SELECT s FROM App\Entity\SAV s WHERE s.date = CURRENT_DATE() ORDER by s.dayMoment');
     
-        $TodayDate = $query->getResult();
+        return $query->getResult();
     }
 
     // /**

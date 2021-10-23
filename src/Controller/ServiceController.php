@@ -81,13 +81,12 @@ class ServiceController extends AbstractController
     {            
         $repo = $this->getDoctrine()->getRepository(SAV::class)
                                     ->getTodayDate();
-        $retours = $repo->findAll();
-        dump($retours);
-
+        dump($repo);
         return $this->render('service/service.html.twig',[
-            "retours" => $retours
+            "retours" => $repo
         ]);
     }
+
     /**
      * @Route("/recap", name="recap")
      */
