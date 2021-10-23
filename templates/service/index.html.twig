@@ -34,7 +34,15 @@
 <div class="form-group">
     <label for="">Numéro du Produits </label>
     {{ form_widget(formSAV.numProduct) }}
-</div>
+</div><br/>
+<div class="form-group">
+    <label for="">Date de récupération </label>
+    {{ form_widget(formSAV.date) }}
+</div><br/>
+<div class="form-group">
+    <label for="">Moment de la journée </label>
+    {{ form_widget(formSAV.dayMoment) }}
+</div><br/>
 <button type="submit">Prendre le RDV</button>
 
 

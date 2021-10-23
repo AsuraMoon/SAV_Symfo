@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -55,6 +56,17 @@ class ServiceController extends AbstractController
                     ->add('numProduct',TextType::class, [
                         'attr'=> [
                             'placeholder' => '1234567890'
+                        ]
+                    ])
+                    ->add('date',DateType::class,[
+                        'widget' => 'single_text',
+                    ])
+                    ->add('dayMoment',ChoiceType::class, [
+                        'placeholder' => 'Choisir un moment de la journée',
+                        'choices' => [
+                            'Matin 7h-11h' => 'Matin',
+                            'Midi 11h-15h'=>'Midi',
+                            'Soir 15h-19h'=>'Soir',
                         ]
                     ])
                     ->getForm();

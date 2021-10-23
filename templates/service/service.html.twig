@@ -4,17 +4,21 @@
 
 {% block body %}
 
-<h1>Résumer des rdv SAV</h1>
+<h1>Résumer des rdv SAV Du jour</h1>
 
 {% for retour in retours %}
 
-<p>
-    {{retour.fName}}
+<p> 
+    <h4>Nom et prénom</h4>
     {{retour.lName}}
+    {{retour.fName}}
+    <h4>Contact</h4>
     {{retour.mail}}
     {{retour.phone}}
+    <h4>Catégories</h4>
     {{retour.categories}}
     {{retour.numProduct}}
+    <h4>Moment de RDV</h4>
     {{retour.dayMoment}}
 <p>
 
