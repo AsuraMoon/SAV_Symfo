@@ -15,7 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 class ServiceController extends AbstractController
 {
     /**
-     * @Route("/", name="service")
+     * @Route("/", name="index")
      */
     public function create(Request $request, EntityManagerInterface $manager)
     {
@@ -76,7 +76,7 @@ class ServiceController extends AbstractController
     }
 
     /**
-     * @Route("/service", name="rdv")
+     * @Route("/service", name="service")
      */
     public function index()
     {            
