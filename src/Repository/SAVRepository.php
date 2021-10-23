@@ -19,6 +19,18 @@ class SAVRepository extends ServiceEntityRepository
         parent::__construct($registry, SAV::class);
     }
 
+    public function getTodayDate():void 
+    {
+        $now = $this->getEntityManager();
+        $query = $now->createQuery('
+            SELECT * FROM `sav` 
+            WHERE date = date(now()) 
+            ORDER by `day_moment`
+            ');
+    
+        $TodayDate = $query->getResult();
+    }
+
     // /**
     //  * @return SAV[] Returns an array of SAV objects
     //  */

@@ -2,8 +2,8 @@
 
 namespace App\Entity;
 
-use App\Repository\SAVRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\SAVRepository;
 
 /**
  * @ORM\Entity(repositoryClass=SAVRepository::class)
@@ -51,6 +51,16 @@ class SAV
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $token;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $date;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $dayMoment;
 
     public function getId(): ?int
     {
@@ -140,4 +150,29 @@ class SAV
 
         return $this;
     }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function getDayMoment(): ?string
+    {
+        return $this->dayMoment;
+    }
+
+    public function setDayMoment(string $dayMoment): self
+    {
+        $this->dayMoment = $dayMoment;
+
+        return $this;
+    }
+
 }

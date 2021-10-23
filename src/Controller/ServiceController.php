@@ -4,13 +4,12 @@ namespace App\Controller;
 
 use App\Entity\SAV;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ServiceController extends AbstractController
 {
@@ -80,7 +79,8 @@ class ServiceController extends AbstractController
      */
     public function index()
     {            
-        $repo = $this->getDoctrine()->getRepository(SAV::class);
+        $repo = $this->getDoctrine()->getRepository(SAV::class)
+                                    ->getTodayDate();
         $retours = $repo->findAll();
         dump($retours);
 
@@ -95,4 +95,5 @@ class ServiceController extends AbstractController
     {            
         return $this->render('service/recap.html.twig');
     }
+
 }
