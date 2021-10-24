@@ -9,16 +9,17 @@
 {% for retour in retours %}
 
 <p> 
-    <h4>Nom et prénom</h4>
+    <hr>
+    <strong>Nom et prénom</strong>
     {{retour.lName}}
     {{retour.fName}}
-    <h4>Contact</h4>
-    {{retour.mail}}
-    {{retour.phone}}
-    <h4>Catégories</h4>
-    {{retour.categories}}
-    {{retour.numProduct}}
-    <h4>Moment de RDV</h4>
+    <strong>Contact</strong>
+    <strong>Mail</strong>: {{retour.mail}}
+    <strong>Téléphone</strong>: {{retour.phone}}<br/>
+    <strong>Produits</strong>
+    <strong>Catégories</strong>: {{retour.categories}}
+    <strong>Ref</strong>: {{retour.numProduct}}
+    <strong>Moment de RDV</strong>
     {{retour.dayMoment}}
 <p>
 
