@@ -2,22 +2,32 @@
 
 namespace App\Controller;
 
+use App\Service\Mailer;
 use App\Entity\SAV;
+use Symfony\Component\Mime\Email;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ServiceController extends AbstractController
 {
+    public function generateToken(){
+        return rtrim(strtr(base64_encode(random_bytes( 32 )),'+/','-_'),'=');
+    }
+    
     /**
      * @Route("/", name="index")
      */
-    public function create(Request $request, EntityManagerInterface $manager)
+    public function create(Request $request, EntityManagerInterface $manager, Mailer $mailer)
     {
         dump($request);
         $sav = new SAV();
@@ -33,14 +43,14 @@ class ServiceController extends AbstractController
                             'placeholder' => 'Nom'
                         ]
                     ])
-                    ->add('mail',TextType::class, [
+                    ->add('mail',EmailType::class, [
                         'attr'=> [
                             'placeholder' => 'xxx@xxx.fr'
                         ]
                     ])
                     ->add('phone',TextType::class, [
                         'attr'=> [
-                            'placeholder' => '01 23 45 67 89'
+                            'placeholder' => '+33 (1) / 01 23 45 67 89'
                         ]
                     ])
                     ->add('categories', ChoiceType::class,[
@@ -55,7 +65,7 @@ class ServiceController extends AbstractController
                     ])
                     ->add('numProduct',TextType::class, [
                         'attr'=> [
-                            'placeholder' => '1234567890'
+                            'placeholder' => '1B3d5f7h9J'
                         ]
                     ])
                     ->add('date',DateType::class,[
@@ -75,8 +85,11 @@ class ServiceController extends AbstractController
             dump($sav);
 
             if($form->isSubmitted()&& $form->isValid()){
+                $sav->setToken($this->generateToken());
                 $manager->persist($sav);
                 $manager->flush();
+                $mailer->sendMail($sav->getMail(),$sav->getToken());
+                dump($sav);
                 
                 return $this->redirectToRoute('recap');
             }

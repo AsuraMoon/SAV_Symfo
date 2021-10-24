@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\SAVRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=SAVRepository::class)
@@ -18,31 +19,38 @@ class SAV
     private $id;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255)
      */
     private $fName;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255)
      */
     private $lName;
 
     /**
+     * @Assert\Email()
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255)
      */
     private $mail;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255)
      */
     private $phone;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255)
      */
     private $categories;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255)
      */
     private $numProduct;
@@ -53,11 +61,13 @@ class SAV
     private $token;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="date")
      */
     private $date;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255)
      */
     private $dayMoment;
